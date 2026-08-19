@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>neXa AI — Build Faster. Create Smarter.</title>
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/theme.css">
+    <link rel="stylesheet" href="./css/app.css">
+</head>
+<body>
+    <!-- Preloader -->
+    <div id="preloader" class="preloader">
+        <div class="preloader-content">
+            <img src="./assets/logo.svg" alt="neXa Logo" class="preloader-logo">
+            <h1>neXa AI</h1>
+            <p>Assistant Loading...</p>
+            <div class="spinner"></div>
+        </div>
+    </div>
+
+    <!-- App Container -->
+    <div class="app-layout">
+        <!-- Sidebar Backdrop for Mobile -->
+        <div id="sidebar-backdrop" class="sidebar-backdrop"></div>
+
+        <!-- Sidebar -->
+        <aside id="sidebar" class="sidebar">
+            <div class="sidebar-header">
+                <div class="brand">
+                    <img src="./assets/logo.svg" alt="neXa Logo" class="brand-logo">
+                    <span class="brand-name">neXa</span>
+                </div>
+                <button id="sidebar-close" class="icon-btn mobile-only" aria-label="Close sidebar">✕</button>
+            </div>
+
+            <div class="sidebar-action">
+                <button id="new-chat-btn" class="primary-btn full-width">
+                    <span>+ New Chat</span>
+                </button>
+            </div>
+
+            <div class="sidebar-search">
+                <input type="text" id="search-input" placeholder="Search chats..." aria-label="Search chats">
+            </div>
+
+            <div class="sidebar-history-container">
+                <div class="sidebar-section-title">Recent Chats</div>
+                <div id="chat-history-list" class="chat-history-list">
+                    <!-- Populated dynamically -->
+                </div>
+            </div>
+
+            <div class="sidebar-footer">
+                <button id="settings-btn" class="footer-nav-btn">⚙️ Settings</button>
+                <button id="about-btn" class="footer-nav-btn">ℹ️ About neXa</button>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="app-header">
+                <button id="sidebar-toggle" class="icon-btn mobile-only" aria-label="Open sidebar">☰</button>
+                <div class="header-title" id="current-chat-title">neXa AI</div>
+                <div class="header-actions">
+                    <button id="theme-toggle" class="icon-btn" aria-label="Toggle Theme">🌙</button>
+                </div>
+            </header>
+
+            <!-- Chat View / Welcome Screen -->
+            <div id="chat-container" class="chat-container">
+                <!-- Welcome Screen -->
+                <div id="welcome-screen" class="welcome-screen">
+                    <div class="welcome-banner">
+                        <h2>neXa AI</h2>
+                        <p>How can I help you today?</p>
+                    </div>
+                    <div class="suggestion-grid">
+                        <button class="suggestion-card" data-prompt="Help me write code for">
+                            <span class="card-icon">💻</span>
+                            <span class="card-title">Coding</span>
+                            <span class="card-desc">Write, debug & optimize code</span>
+                        </button>
+                        <button class="suggestion-card" data-prompt="Help me write an essay/article about">
+                            <span class="card-icon">✍️</span>
+                            <span class="card-title">Writing</span>
+                            <span class="card-desc">Draft emails, blogs & essays</span>
+                        </button>
+                        <button class="suggestion-card" data-prompt="Give me creative ideas for">
+                            <span class="card-icon">💡</span>
+                            <span class="card-title">Ideas</span>
+                            <span class="card-desc">Brainstorm projects & concepts</span>
+                        </button>
+                        <button class="suggestion-card" data-prompt="Explain clearly how">
+                            <span class="card-icon">📖</span>
+                            <span class="card-title">Explain</span>
+                            <span class="card-desc">Break down complex topics</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Messages Area -->
+                <div id="messages-list" class="messages-list hidden">
+                    <!-- Dynamic chat messages -->
+                </div>
+            </div>
+
+            <!-- Composer Area -->
+            <div class="composer-container">
+                <div class="composer-wrapper">
+                    <textarea id="message-input" placeholder="Message neXa..." rows="1" aria-label="Message input"></textarea>
+                    <button id="send-btn" class="send-btn" aria-label="Send message" disabled>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+                    </button>
+                </div>
+                <div class="composer-footer">neXa AI may display inaccurate info. Verify important facts.</div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settings-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Settings</h3>
+                <button id="settings-close" class="icon-btn">✕</button>
+            </div>
+            <div class="modal-body">
+                <div class="setting-item">
+                    <label>Theme</label>
+                    <select id="setting-theme">
+                        <option value="dark">Dark Mode</option>
+                        <option value="light">Light Mode</option>
+                    </select>
+                </div>
+                <div class="setting-item danger-zone">
+                    <label>Chat Data</label>
+                    <button id="clear-all-chats" class="danger-btn">Clear All Conversations</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Modal -->
+    <div id="about-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>About neXa AI</h3>
+                <button id="about-close" class="icon-btn">✕</button>
+            </div>
+            <div class="modal-body about-body">
+                <img src="./assets/logo.svg" alt="neXa Logo" class="about-logo">
+                <h4>neXa AI</h4>
+                <p class="tagline">Build Faster. Create Smarter.</p>
+                <p class="version">Version 1.0.0</p>
+                <p class="description">An AI-powered assistant built by neXa, connecting seamlessly with Google Gemini.</p>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="./js/app.js"></script>
+</body>
+</html>
